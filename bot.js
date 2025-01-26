@@ -12,6 +12,9 @@ const bot = new Telegraf(BOT_TOKEN)
 const creatureList = JSON.parse(fs.readFileSync('data/creatureList.json', 'utf-8'))
 const authors = JSON.parse(fs.readFileSync('data/authors.json', 'utf-8'))
 
+const WriteFile = (path, data) => {
+    fs.writeFileSync(`${path}.json`, JSON.stringify(data, null, 2), 'utf-8')
+}
 
 
 bot.start((ctx) => ctx.reply('Бестиарий игрока, сюда ты можешь заполнить существ которых ты встречаешь в ходе приключения.'))
@@ -44,8 +47,8 @@ bot.command('add', (ctx) => {
 
     authors.push(author)
 
-    
-    fs.writeFileSync('data/creatureList.json', JSON.stringify(creatureList, null, 2), 'utf-8')
+    WriteFile('data/creatureList', creatureList)
+    // fs.writeFileSync('data/creatureList.json', JSON.stringify(creatureList, null, 2), 'utf-8')
 
     fs.writeFileSync('data/authors.json', JSON.stringify(authors, null, 2), 'utf-8')
 
