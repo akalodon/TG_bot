@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Человек",
+    "description": "Живут не долго, но быстро плодятся.",
+    "mind": true
+  },
+  {
+    "name": "Эльф",
+    "description": "",
+    "mind": true
+  },
+  {
+    "name": "Орк",
+    "description": "",
+    "mind": true
+  },
+  {
+    "name": "Гоблин",
+    "description": "",
+    "mind": true
+  },
+  {
+    "name": "Волк"
+  },
+  {
+    "name": "Фея"
+  },
+  {
+    "name": "Кракен"
+  },
+  {
+    "name": "Вурдалак"
+  },
+  {
+    "name": "Бес"
+  }
+]
