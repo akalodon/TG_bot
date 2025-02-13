@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Неизвестный",
+    "race": "Человек",
+    "class": "Варвар",
+    "level": 3,
+    "сharacteristics": {
+      "strengthMod": 4,
+      "agilityMod": 2,
+      "enduranceMod": 2,
+      "intelligenceMod": 1,
+      "wisdomMod": 1,
+      "charismaMod": 0
+    },
+    "classArmor": 15,
+    "maxHP": 22,
+    "currentHP": 22,
+    "timeHP": 0,
+    "classDifficult": 17,
+    "skills": {
+      "acrobatics": 2,
+      "athletics": 7,
+      "theft": 2,
+      "survival": 4,
+      "diplomacy": 0,
+      "intimidation": 3,
+      "performance": 0,
+      "medicine": 4,
+      "mysticism": 1,
+      "deception": 0,
+      "society": 1,
+      "occultism": 1,
+      "nature": 1,
+      "religion": 1,
+      "craft": 4,
+      "stealth": 2
+    },
+    "checkSkills": {
+      "resistance": 7,
+      "reaction": 5,
+      "will": 6,
+      "attention": 6
+    },
+    "state": {
+      "rage": false,
+      "calm": false
+    },
+    "resistance": {
+      "cold": 1
+    },
+    "owner": "Владимир"
+  }
+]
