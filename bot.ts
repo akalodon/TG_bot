@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 import { getMenu } from './keyboard/startMenu';
 import { getMenuTasks } from './keyboard/todoMenu';
 import { Update, Message } from 'telegraf/types';
-import { getCharacterMenu, getStateMenu, getHitMenu } from './keyboard/characterMenu';
+import { getPathfinderMenu, getCharacterMenu, getStateMenu, getHitMenu, getHitRollMenu, getDamageRollMenu } from './keyboard/characterMenu';
 dotenv.config()
 
 const BOT_TOKEN: string = process.env.BOT_TOKEN!
@@ -15,6 +15,11 @@ const bot = new Telegraf(BOT_TOKEN)
 const creatureList = JSON.parse(fs.readFileSync('data/creatureList.json', 'utf-8'))
 const authors = JSON.parse(fs.readFileSync('data/authors.json', 'utf-8'))
 const characterList = JSON.parse(fs.readFileSync('data/сharacters.json', 'utf-8'))
+
+let character = {}
+const getCharacter = (index) => characterList.find((_, indexChar) => {
+    return index === indexChar
+})
 
 let waitingForNumber = false;
 
@@ -30,14 +35,16 @@ bot.start((ctx) => {
 
 
 
-// Начало блока "Персонажи"
-
-bot.hears('Персонажи', ctx => {
+// Начало блока "Персонажи" 
+// --> Блок Pathfinder
+bot.hears('Pafhfinder', ctx => {
     ctx.reply(
-        'Это блок работы с персонажем',
-        getCharacterMenu()
+        'Это блок работы с игрой Pafhfinder',
+        getPathfinderMenu()
     )
 })
+
+
 
 
 bot.hears('Список персонажей', ctx => {
@@ -48,13 +55,33 @@ bot.hears('Список персонажей', ctx => {
     ctx.reply(`Список персонажей \n ${character.join('\n')}`)
 })
 
+bot.hears('Добавить персонажа', ctx => {
+
+})
+
+bot.hears('Выбрать персонажа', ctx => {
+    ctx.reply('Введите номер из списка')
+    step
+    const index = Number(ctx.message.chat)
+    console.log(index);
+
+    character = getCharacter(index)
+    console.log(character);
+})
+
+
+// --> Блок Персонаж
+
 bot.hears('Нанесение урона', ctx => {
     
+
+
     ctx.reply('Какое попадание?', getHitMenu())
+    
     
     bot.hears('Попадание', ctx => {
         let waitingForNumber = false;
-        ctx.reply('Укажите урон броска для полного рассчета')
+        ctx.reply('Какой кубик бросаем?', getDamageRollMenu())
 
         // bot.on('text', (ctx) => {
         //     if (waitingForNumber) {
@@ -79,7 +106,7 @@ bot.hears('Нанесение урона', ctx => {
 })
 
 bot.hears('Получение урона', ctx => {
-
+    
 })
 
 bot.hears('Изменение состояния', ctx => {
@@ -134,6 +161,22 @@ bot.hears('Долгий отдых', ctx => {
     WriteFile('data/сharacters', changingCharacterList)
 })
 
+bot.hears('Повышение уровня', ctx => {
+    const changingCharacterList = characterList.map((character)=>{
+        const state = {
+            calm: false,
+            rage: false
+        }
+
+        const currentHP = character.maxHP
+        const timeHP = 0
+        return {...character, timeHP, currentHP, state}
+    })
+
+
+    WriteFile('data/сharacters', changingCharacterList)
+})
+
 // Конец блока "Персонажи"
 
 
@@ -152,7 +195,6 @@ bot.action('characters', ctx => {
     })
 ctx.reply(`Список персонажей \n ${character.join('\n')}`)
 })
-
 
 bot.command('add', (ctx) => {
     
@@ -227,9 +269,6 @@ bot.command('delete', (ctx) => {
 
     
 })
-
-
-
 
 // bot.hears("Добавить задачу", async (ctx) => {
 
