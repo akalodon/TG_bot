@@ -61,7 +61,7 @@ bot.hears('Добавить персонажа', ctx => {
 
 bot.hears('Выбрать персонажа', ctx => {
     ctx.reply('Введите номер из списка')
-    step
+
     const index = Number(ctx.message.chat)
     console.log(index);
 
